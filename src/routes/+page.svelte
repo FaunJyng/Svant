@@ -43,10 +43,25 @@
 			>
 				<h1>Ghost</h1>
 				<Button type="primary" ghost>Primary</Button>
+				<Button type="default" ghost>Default</Button>
+				<Button type="dashed" ghost>Dashed</Button>
 				<Button variant="solid" color="cyan" ghost>Cyan</Button>
 				<Button variant="solid" color="purple" ghost>Purple</Button>
 				<Button variant="solid" color="red" ghost>Text</Button>
 				<Button variant="solid" color="pink" ghost>Pink</Button>
+			</div>
+			<div class="col">
+				<h1>Disabled</h1>
+				<Button type="primary" disabled>Primary</Button>
+				<Button disabled>Default</Button>
+				<Button type="dashed" disabled>Dashed</Button>
+				<Button type="text" block disabled>Text</Button>
+				<Button type="link" block disabled>Link</Button>
+				<Button type="primary" block ghost disabled>Ghost</Button>
+			</div>
+			<div class="col">
+				<h1>Loading</h1>
+				<Button type="primary" loading>Primary</Button>
 			</div>
 		</div>
 		<div class="row">

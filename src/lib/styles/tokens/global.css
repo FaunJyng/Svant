@@ -7,9 +7,9 @@
 	--svant-text-color-general-black-hover: rgba(0, 0, 0, 0.96);
 	--svant-text-color-general-black-active: rgba(0, 0, 0, 0.97);
 
-	--svant-text-color-general-white: rgba(255, 255, 255, 0.97);
-	--svant-text-color-general-white-hover: rgba(255, 255, 255, 0.96);
-	--svant-text-color-general-white-active: rgba(255, 255, 255, 0.97);
+	--svant-text-color-general-white: rgba(255, 255, 255, 0.98);
+	--svant-text-color-general-white-hover: rgba(255, 255, 255, 0.97);
+	--svant-text-color-general-white-active: rgba(255, 255, 255, 0.98);
 
 	--svant-heading-color-black: rgba(0, 0, 0, 0.9);
 	--svant-heading-color-white: rgba(255, 255, 255, 0.9);
@@ -60,6 +60,10 @@
 	--svant-text-color-general-theme-hover: var(--svant-text-color-general-black-hover);
 	--svant-text-color-general-theme-active: var(--svant-text-color-general-black-active);
 
+	--svant-bg-color-general-theme: var(--svant-text-color-general-white);
+	--svant-bg-color-general-theme-hover: var(--svant-text-color-general-white-hover);
+	--svant-bg-color-general-theme-active: var(--svant-text-color-general-white-active);
+
 	/* Global: default colors */
 	--svant-text-color-default: var(--svant-text-color-general-black);
 	--svant-text-color-default-hover: var(--svant-blue-6);
@@ -68,7 +72,6 @@
 	--svant-border-color-default: rgba(0, 0, 0, 0.255);
 	--svant-border-color-default-hover: var(--svant-blue-6);
 	--svant-border-color-default-active: var(--svant-blue-7);
-
 	--svant-border-color-default-solid-hover: rgba(0, 0, 0, 0.255);
 	--svant-border-color-default-solid-active: rgba(0, 0, 0, 0.255);
 
@@ -163,17 +166,11 @@
 	--svant-text-color-link-active: var(--svant-blue-7);
 
 	/* Global: Disabled colors */
-	--svant-text-color-disabled: var(--svant-gold-6);
-	--svant-text-color-disabled-hover: var(--svant-gold-5);
-	--svant-text-color-disabled-active: var(--svant-gold-7);
-
-	--svant-border-color-disabled: var(--svant-gold-6);
-	--svant-border-color-disabled-hover: var(--svant-gold-5);
-	--svant-border-color-disabled-active: var(--svant-gold-7);
-
-	--svant-bg-color-disabled: var(--svant-gold-1);
-	--svant-bg-color-disabled-hover: var(--svant-gold-2);
-	--svant-bg-color-disabled-active: var(--svant-gold-3);
+	--svant-text-color-disabled: rgba(0, 0, 0, 0.4);
+	--svant-border-color-disabled: rgba(0, 0, 0, 0.1);
+	--svant-bg-color-disabled: rgba(0, 0, 0, 0.02);
+	--svant-solid-bg-color-disabled: rgba(0, 0, 0, 0.039);
+	--svant-solid-shadow-color-disabled: transparent;
 
 	/* Global: blue colors */
 	--svant-text-color-blue: var(--svant-blue-6);
