@@ -1,7 +1,7 @@
 .svant-theme-dark {
 	--svant-bg-color-root: rgb(20, 20, 20);
 	background-color: var(--svant-bg-color-root) !important;
-	--svant-text-color-root: rgb(250, 250, 250);
+	--svant-text-color-root: rgb(255, 255, 255);
 	color: var(--svant-text-color-root);
 
 	--svant-text-color-general-theme: var(--svant-text-color-general-white);

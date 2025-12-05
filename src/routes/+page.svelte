@@ -119,6 +119,53 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col">
+				<h1>Type + Variant only</h1>
+				<div class="row">
+					<div class="col">
+						<Button type="primary" variant="solid">Primary + Solid</Button>
+						<Button type="primary" variant="outlined">Primary + Outlined</Button>
+						<Button type="primary" variant="dashed">Primary + Dashed</Button>
+						<Button type="primary" variant="filled">Primary + Filled</Button>
+						<Button type="primary" variant="text">Primary + Text</Button>
+						<Button type="primary" variant="link">Primary + Link</Button>
+					</div>
+					<div class="col">
+						<Button type="default" variant="solid">Default + Solid</Button>
+						<Button type="default" variant="outlined">Default + Outlined</Button>
+						<Button type="default" variant="dashed">Default + Dashed</Button>
+						<Button type="default" variant="filled">Default + Filled</Button>
+						<Button type="default" variant="text">Default + Text</Button>
+						<Button type="default" variant="link">Default + Link</Button>
+					</div>
+					<div class="col">
+						<Button type="dashed" variant="solid">Dashed + Solid</Button>
+						<Button type="dashed" variant="outlined">Dashed + Outlined</Button>
+						<Button type="dashed" variant="dashed">Dashed + Dashed</Button>
+						<Button type="dashed" variant="filled">Dashed + Filled</Button>
+						<Button type="dashed" variant="text">Dashed + Text</Button>
+						<Button type="dashed" variant="link">Dashed + Link</Button>
+					</div>
+					<div class="col">
+						<Button type="text" variant="solid">Text + Solid</Button>
+						<Button type="text" variant="outlined">Text + Outlined</Button>
+						<Button type="text" variant="dashed">Text + Dashed</Button>
+						<Button type="text" variant="filled">Text + Filled</Button>
+						<Button type="text" variant="text">Text + Text</Button>
+						<Button type="text" variant="link">Text + Link</Button>
+					</div>
+					<div class="col">
+						<Button type="link" variant="solid">Link + Solid</Button>
+						<Button type="link" variant="outlined">Link + Outlined</Button>
+						<Button type="link" variant="dashed">Link + Dashed</Button>
+						<Button type="link" variant="filled">Link + Filled</Button>
+						<Button type="link" variant="text">Link + Text</Button>
+						<Button type="link" variant="link">Link + Link</Button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 

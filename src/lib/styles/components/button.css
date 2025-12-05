@@ -19,7 +19,6 @@
 	--cbtn-only-icon-size: inherit;
 	--cbtn-only-icon-size-sm: inherit;
 	--cbtn-only-icon-size-lg: inherit;
-	/* Colors */
 }
 
 .tokens {
@@ -166,25 +165,10 @@
 	--btn-wave-color: transparent;
 }
 
-/* .type-primary.variant-outlined:not(.colored) <-> .color-primary .variant-outlined */
-/* .type-primary.variant-dashed:not(.colored) <-> .color-primary .variant-dashed */
-/* .type-primary.variant-outlined:not(.colored) <-> .color-primary .variant-outlined */
-/* .type-primary.variant-text:not(.colored) <-> .color-primary .variant-text */
-
-/* .type-default.variant-solid:not(.colored) <-> .color-default .variant-solid */
-/* .type-default.variant-filled:not(.colored) <-> .color-default .variant-filled */
-
-/* .type-dashed.variant-solid:not(.colored) <-> .color-default .variant-solid */
-/* .type-dashed.variant-dashed:not(.colored) <-> .color-default .variant-dashed */
-
-/* .type-text.variant-solid:not(.colored) <-> .type- */
-
 /* - Color layer */
-/* .varianted:not(.colored).type-default <-> .color-default */
-/* .varianted:not(.colored).type-primary <-> .color-primary */
 
 .color-default,
-.varianted:not(.colored).type-default,
+.type-default.varianted:not(.colored),
 .type-dashed.varianted:not(.colored),
 :is(.type-default, .type-dashed, .type-text, .type-link):is(
 		.variant-solid,
@@ -193,9 +177,9 @@
 		.variant-dashed,
 		.variant-text
 	):not(.colored) {
-	--btn-variant-solid-text-color: var(--svant-text-color-general-white);
-	--btn-variant-solid-text-color-hover: var(--svant-text-color-general-white-hover);
-	--btn-variant-solid-text-color-active: var(--svant-text-color-general-white-active);
+	--btn-variant-solid-text-color: var(--svant-bg-color-general-theme);
+	--btn-variant-solid-text-color-hover: var(--svant-bg-color-general-theme-hover);
+	--btn-variant-solid-text-color-active: var(--svant-bg-color-general-theme-active);
 	--btn-variant-solid-bg-color: var(--svant-solid-bg-color-default);
 	--btn-variant-solid-bg-color-hover: var(--svant-solid-bg-color-default-hover);
 	--btn-variant-solid-bg-color-active: var(--svant-solid-bg-color-default-active);
@@ -222,8 +206,7 @@
 }
 
 .color-primary,
-.varianted:not(.colored).type-primary,
-.type-primary:is(.variant-outlined, .variant-dashed, .variant-text):not(.colored) {
+.type-primary.varianted:not(.colored) {
 	--btn-variant-solid-text-color: var(--svant-text-color-general-white);
 	--btn-variant-solid-text-color-hover: var(--svant-text-color-general-white-hover);
 	--btn-variant-solid-text-color-active: var(--svant-text-color-general-white-active);
@@ -710,6 +693,8 @@
 
 	--btn-shadow-color-hover: var(--btn-shadow-color);
 	--btn-shadow-color-active: var(--btn-shadow-color);
+
+	--btn-wave-color: var(--btn-variant-solid-bg-color);
 }
 
 .variant-solid.color-default,

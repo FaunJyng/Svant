@@ -1,6 +1,9 @@
 {
 	"name": "axolt-svant",
-	"version": "0.0.1",
+	"version": "0.0.2",
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
@@ -49,7 +52,6 @@
 		"svelte"
 	],
 	"dependencies": {
-		"@ant-design/colors": "^7.2.1",
 		"csstype": "^3.2.3"
 	}
 }
