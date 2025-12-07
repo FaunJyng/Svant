@@ -28,6 +28,9 @@
 	--svant-control-height: 32px;
 	--svant-control-height-lg: 40px;
 
+	/* Global: padding */
+	--svant-padding-xs: 8px;
+
 	/* Global: typography */
 	--svant-font-size: 14px;
 

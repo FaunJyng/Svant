@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Button expand with added icon</title>
+		<style>
+			:root {
+				--btn-bg: #276ef1;
+				--btn-color: #fff;
+				--btn-pad-y: 10px;
+				--btn-pad-x: 16px;
+			}
+
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px; /* space between text and icon when present */
+				padding: var(--btn-pad-y) var(--btn-pad-x);
+				background: var(--btn-bg);
+				color: var(--btn-color);
+				border: 0;
+				border-radius: 8px;
+				font:
+					600 16px/1 'Inter',
+					system-ui,
+					-apple-system,
+					'Segoe UI',
+					Roboto,
+					'Helvetica Neue',
+					Arial;
+				cursor: pointer;
+				white-space: nowrap;
+				overflow: visible; /* allow width change to be visible */
+				/* no width here — we'll set inline widths from JS for animation */
+			}
+
+			/* icon baseline style (will be created by JS) */
+			.btn .icon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 20px;
+				height: 20px;
+				flex: 0 0 20px;
+				font-size: 14px;
+				line-height: 1;
+			}
+
+			/* optional subtle icon entrance (opacity) */
+			.btn .icon-inner {
+				display: inline-block;
+				transform-origin: center;
+				opacity: 0;
+				transform: scale(0.9);
+				transition:
+					opacity 140ms ease,
+					transform 240ms cubic-bezier(0.2, 0.9, 0.3, 1);
+			}
+
+			.btn.icon-visible .icon-inner {
+				opacity: 1;
+				transform: scale(1);
+			}
+
+			/* transition of width will be applied inline from JS:
+     button.style.transition = "width 1s cubic-bezier(...)" */
+		</style>
+	</head>
+	<body>
+		<button id="myBtn" class="btn" type="button">
+			<span class="btn-text">start</span>
+		</button>
+
+		<script>
+			/*
+ Behavior:
+  - Button starts with only text.
+  - When called, JS creates an icon element and computes the button's new width
+    *without* affecting current layout (we measure using an offscreen clone).
+  - Then the script sets the button's inline width to its current width (px),
+    triggers a reflow, and animates width to the computed final width over 1s.
+  - After animation finishes, inline width/transition are cleared so the button
+    can remain flexible/responsive.
+*/
+
+			const btn = document.getElementById('myBtn');
+			let iconAdded = false;
+
+			function createIconElement() {
+				// Create the outer icon wrapper and the visible inner element
+				const wrapper = document.createElement('span');
+				wrapper.className = 'icon';
+				// Use an inline SVG for crispness (you can replace with emoji or <img>)
+				const svg = `
+    <span class="icon-inner" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  `;
+				wrapper.innerHTML = svg;
+				return wrapper;
+			}
+
+			function measureWidthWithIcon(button, iconNode) {
+				// Clone the button, append the icon to the clone, measure width offscreen.
+				const clone = button.cloneNode(true);
+				clone.style.visibility = 'hidden';
+				clone.style.position = 'absolute';
+				clone.style.left = '-9999px';
+				clone.style.top = '-9999px';
+				clone.style.width = 'auto'; // let it size naturally
+				clone.style.transition = 'none';
+				// Append the icon node to the clone (use a clone of the icon to avoid moving original)
+				const iconClone = iconNode.cloneNode(true);
+				clone.appendChild(iconClone);
+				document.body.appendChild(clone);
+				const width = clone.getBoundingClientRect().width;
+				document.body.removeChild(clone);
+				return Math.ceil(width);
+			}
+
+			function animateAddIcon(button) {
+				if (iconAdded) return; // do nothing if already added
+				const icon = createIconElement();
+
+				// Measure current width
+				const startRect = button.getBoundingClientRect();
+				const startWidth = Math.ceil(startRect.width);
+
+				// Measure target width by using a clone with the icon appended
+				const targetWidth = measureWidthWithIcon(button, icon);
+
+				// Append the real icon to the button but keep it visually hidden until animation runs
+				button.appendChild(icon);
+
+				// Prepare for animation:
+				// - Fix starting width inline
+				// - Force reflow
+				// - Apply transition and set target width
+				button.style.width = startWidth + 'px';
+				// small tick to ensure width is applied before we change it
+				requestAnimationFrame(() => {
+					// apply transition for width (1s)
+					button.style.transition = 'width 1s cubic-bezier(0.2, 0.8, 0.2, 1)';
+					// now set to measured target width
+					button.style.width = targetWidth + 'px';
+					// after a small delay start the icon-inner opacity/scale reveal class
+					// (this creates a nicer micro-animation for the glyph itself)
+					setTimeout(() => {
+						button.classList.add('icon-visible');
+					}, 120); // adjust to taste
+				});
+
+				// When transition ends: clean up inline width/transition so layout returns to auto
+				function onTransitionEnd(e) {
+					if (e.propertyName === 'width') {
+						// remove inline width and transition so the button becomes unconstrained
+						button.style.width = '';
+						button.style.transition = '';
+						// make sure the visible class remains so icon-inner is shown
+						button.classList.add('icon-visible');
+						button.removeEventListener('transitionend', onTransitionEnd);
+					}
+				}
+				button.addEventListener('transitionend', onTransitionEnd);
+				iconAdded = true;
+			}
+
+			// Example: add icon when button is clicked
+			btn.addEventListener('click', () => {
+				animateAddIcon(btn);
+			});
+		</script>
+	</body>
+</html>

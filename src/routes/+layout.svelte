@@ -7,13 +7,13 @@
 
 <div class={['wrapper', mode]}>
 	<header>
-		<Button
+		<!-- <Button
 			onclick={() => {
 				mode === 'svant-theme-light'
 					? (mode = 'svant-theme-dark')
 					: (mode = 'svant-theme-light');
 			}}>Toggle dark/light mode</Button
-		>
+		> -->
 	</header>
 	<main>
 		{@render children()}

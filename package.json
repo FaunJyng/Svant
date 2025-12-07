@@ -1,9 +1,10 @@
 {
-	"name": "axolt-svant",
-	"version": "0.0.2",
+	"name": "@axolt/svant",
+	"version": "0.0.1",
 	"publishConfig": {
 		"access": "public"
 	},
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
@@ -52,6 +53,7 @@
 		"svelte"
 	],
 	"dependencies": {
+		"@axolt/svicon-ant": "^1.0.1",
 		"csstype": "^3.2.3"
 	}
 }

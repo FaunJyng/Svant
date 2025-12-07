@@ -4,7 +4,6 @@
 @import url('./tokens/global.css');
 @import url('./tokens/light-theme.css');
 @import url('./tokens/dark-theme.css');
-@import url('./components/button.css');
 
 *,
 *::after,
