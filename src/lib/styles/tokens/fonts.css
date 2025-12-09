@@ -10,16 +10,12 @@
 	/* --- Numeric (tabular) ------ */
 	--svant-font-variant-numeric: tabular-nums;
 
-	/* --- Base font size & line-height ------ */
-	--svant-font-size-base: 14px;
-	--svant-line-height-base: 22px;
-
 	/* --- Font scale ------ */
 	--svant-font-size-xs: 12px;
 	--svant-line-height-xs: 20px;
 
-	--svant-font-size-sm: 14px;
-	--svant-line-height-sm: 22px;
+	--svant-font-size: 14px;
+	--svant-line-height: 22px;
 
 	--svant-font-size-md: 16px;
 	--svant-line-height-md: 24px;
@@ -33,8 +29,11 @@
 	--svant-font-size-xxl: 30px;
 	--svant-line-height-xxl: 38px;
 
+	--svant-line-height-relative: 1.57;
+	--svant-line-height-relative-sm: 1.5;
+
 	/* --- Font weights ------ */
 	--svant-font-weight-regular: 400;
 	--svant-font-weight-medium: 500;
-	--svant-font-weight-semibold: 600;
+	--svant-font-weight-semibold: 700;
 }

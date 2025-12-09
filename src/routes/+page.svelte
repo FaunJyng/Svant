@@ -1,6 +1,7 @@
 <script lang="ts">
+	import Divider from '$lib/components/layout/Divider.svelte';
 	import { Button } from '$lib/index.js';
-	let content = $state('Click');
+	let content = $state('如需继续');
 	let loading = $state(false);
 </script>
 
@@ -8,19 +9,20 @@
 	<div class="showarea">
 		<div class="row">
 			<div class="col">
-				<div>-----------------------------</div>
+				<div>----------------------------------------------</div>
+				<Divider plain>Divider</Divider>
 				<Button
 					type="primary"
 					label={content}
 					{loading}
 					onclick={() => {
 						loading = true;
-						content = 'Loading ...';
 						setTimeout(() => {
 							loading = false;
 						}, 2000);
 					}}
 				/>
+				<Divider />
 			</div>
 		</div>
 	</div>

@@ -23,16 +23,18 @@
 	--svant-border-radius-sm: 4px;
 	--svant-border-radius-lg: 8px;
 
-	/* Global: sizing */
-	--svant-control-height-sm: 24px;
-	--svant-control-height: 32px;
-	--svant-control-height-lg: 40px;
-
-	/* Global: padding */
+	/* Global: padding & margin*/
 	--svant-padding-xs: 8px;
+	--svant-padding: 16px;
+	--svant-padding-lg: 24px;
 
-	/* Global: typography */
-	--svant-font-size: 14px;
+	--svant-margin-block-xs: 8px;
+	--svant-margin-block: 16px;
+	--svant-margin-block-lg: 24px;
+
+	--svant-margin-inline-xs: 8px;
+	--svant-margin-inline: 8px;
+	--svant-margin-inline-lg: 16px;
 
 	/* Global: border & outline */
 	--svant-line-width: 1px;

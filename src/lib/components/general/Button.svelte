@@ -35,11 +35,12 @@
 		htmlType?: ButtonHTMLType;
 		target?: string;
 		loading?: boolean;
-		iconLoading?: Snippet;
 		// Style props
 		label?: string | undefined;
 		icon?: Snippet;
 		iconPlacement?: IconPlacement;
+		loadingIcon?: Snippet;
+		loadingIconReplaceText?: boolean;
 		block?: boolean;
 		shape?: Shape;
 		size?: Size;
@@ -51,9 +52,8 @@
 		type?: Type;
 	};
 
-	export const CHINESE_REGEX = /^[\u4e00-\u9fff]{2}$/;
 	export function autoInsertChineseSpace(text: string) {
-		return CHINESE_REGEX.test(text) ? `${text[0]} ${text[1]}` : text;
+		return text.replace(/([\u4E00-\u9FFF])(?=[\u4E00-\u9FFF])/g, '$1 ');
 	}
 </script>
 
@@ -62,7 +62,7 @@
 		// Functional props
 		children = undefined,
 		ref = $bindable(),
-		autoInsertSpace = true,
+		autoInsertSpace = false,
 		onclick = undefined,
 		href = undefined,
 		htmlType = 'button',
@@ -75,7 +75,8 @@
 		shape = 'rounded',
 		size = 'medium',
 		loading = false,
-		iconLoading = undefined,
+		loadingIcon = undefined,
+		loadingIconReplaceText = false,
 		type = 'default',
 		color = undefined,
 		variant = undefined,
@@ -158,7 +159,7 @@
 <button
 	bind:this={root}
 	{onclick}
-	disabled={disabled || loading}
+	{disabled}
 	type={htmlType}
 	class={[
 		'tokens',
@@ -182,11 +183,14 @@
 			: 'flex-start'}
 	ontransitionend={handleOntransitionend}
 >
-	<!-- {#if children} -->
 	{#if label}
 		{#snippet content()}
 			<a {href} {target} class="content">
-				{label}
+				{#if autoInsertSpace}
+					{autoInsertChineseSpace(label)}
+				{:else}
+					{label}
+				{/if}
 			</a>
 		{/snippet}
 		{#if icon}
@@ -195,8 +199,8 @@
 				{@render content()}
 				<span class="svicon">
 					{#if loading}
-						{#if iconLoading}
-							{@const IconLoading = iconLoading}
+						{#if loadingIcon}
+							{@const IconLoading = loadingIcon}
 							<IconLoading />
 						{:else}
 							<LoadingOutlined spin />
@@ -208,8 +212,8 @@
 			{:else}
 				<span class="svicon">
 					{#if loading}
-						{#if iconLoading}
-							{@const IconLoading = iconLoading}
+						{#if loadingIcon}
+							{@const IconLoading = loadingIcon}
 							<IconLoading />
 						{:else}
 							<LoadingOutlined spin />
@@ -233,9 +237,8 @@
 						class:block-show-loading={block && loading}
 						class:block-hide-loading={block && !loading}
 					>
-						<!-- style:display={block && !loading ? 'none' : 'inline-block'} -->
-						{#if iconLoading}
-							{@const IconLoading = iconLoading}
+						{#if loadingIcon}
+							{@const IconLoading = loadingIcon}
 							<IconLoading />
 						{:else}
 							<LoadingOutlined spin />
@@ -252,9 +255,8 @@
 						class:block-show-loading={block && loading}
 						class:block-hide-loading={block && !loading}
 					>
-						<!-- style:display={block && !loading ? 'none' : 'inline-block'} -->
-						{#if iconLoading}
-							{@const IconLoading = iconLoading}
+						{#if loadingIcon}
+							{@const IconLoading = loadingIcon}
 							<IconLoading />
 						{:else}
 							<LoadingOutlined spin />
@@ -268,8 +270,8 @@
 		<!-- Icon only -->
 		<span class="icon icon-only">
 			{#if loading}
-				{#if iconLoading}
-					{@const IconLoading = iconLoading}
+				{#if loadingIcon}
+					{@const IconLoading = loadingIcon}
 					<IconLoading />
 				{:else}
 					<LoadingOutlined spin />
@@ -287,13 +289,13 @@
 	.tokens {
 		/* Component tokens */
 		/* Typography */
-		--preset-btn-content-font-size: var(--svant-font-size-base);
-		--preset-btn-content-font-size-sm: var(--svant-font-size-base);
+		--preset-btn-content-font-size: var(--svant-font-size);
+		--preset-btn-content-font-size-sm: var(--svant-font-size);
 		--preset-btn-content-font-size-lg: var(--svant-font-size-md);
-		--preset-btn-content-line-height: 1.5714285714285714;
-		--preset-btn-content-line-height-sm: 1.5;
-		--preset-btn-content-line-height-lg: 1.5714285714285714;
-		--preset-btn-font-weight: var(--svant-font-weight-regular);
+		--preset-btn-content-line-height: var(--svant-line-height-relative);
+		--preset-btn-content-line-height-sm: var(--svant-line-height-relative-sm);
+		--preset-btn-content-line-height-lg: var(--svant-line-height-relative);
+		--preset-btn-font-weight: 400;
 		/* Spacing */
 		--preset-btn-padding-block: 4px;
 		--preset-btn-padding-block-sm: 0px;
@@ -307,8 +309,8 @@
 		--preset-btn-only-icon-size-lg: inherit;
 	}
 
+	/* Rendered tokens */
 	.tokens {
-		/* Rendered tokens */
 		--btn-width: fit-content;
 		--btn-font-size: var(--preset-btn-content-font-size);
 		--btn-line-height: var(--preset-btn-content-line-height);
@@ -1204,14 +1206,18 @@
 
 		background-color: var(--svk-btn-bg-color, var(--btn-bg-color));
 		color: var(--svk-btn-text-color, var(--btn-text-color));
-		fill: var(--svk-btn-text-color, var(--btn-text-color));
+		fill: var(--svk-btn-fill-color, var(--btn-text-color));
 		border: var(--svk-btn-border-width, var(--btn-border-width))
 			var(--svk-btn-border-style, var(--btn-border-style))
 			var(--svk-btn-border-color, var(--btn-border-color));
 
-		border-radius: var(--btn-border-radius);
-		box-shadow: var(--btn-shadow-direction) var(--btn-shadow-color);
-		opacity: var(--btn-opacity);
+		border-radius: var(--svk-btn-top-left-border-radius, var(--btn-border-radius))
+			var(--svk-btn-top-right-border-radius, var(--btn-border-radius))
+			var(--svk-btn-bottom-right-border-radius, var(--btn-border-radius))
+			var(--svk-btn-bottom-left-border-radius, var(--btn-border-radius));
+		box-shadow: var(--svk-btn-shadow-direction, var(--btn-shadow-direction))
+			var(--svk-btn-shadow-color, var(--btn-shadow-color));
+		opacity: var(--svk-btn-opacity, var(--btn-opacity));
 
 		transition:
 			font-size var(--svant-motion-duration-mid) var(--svant-motion-ease-in-out),
@@ -1226,20 +1232,30 @@
 			width var(--svant-motion-duration-slow) var(--svant-motion-ease-in-out);
 	}
 
+	.root.loading {
+		pointer-events: none;
+	}
+
 	.root:hover:not(.loading) {
-		background-color: var(--btn-bg-color-hover);
-		color: var(--btn-text-color-hover);
-		fill: var(--btn-text-color-hover);
-		border: var(--btn-border-width) var(--btn-border-style) var(--btn-border-color-hover);
-		box-shadow: var(--btn-shadow-direction) var(--btn-shadow-color-hover);
+		background-color: var(--svk-btn-color-hover, var(--btn-bg-color-hover));
+		color: var(--svk-btn-text-color-hover, var(--btn-text-color-hover));
+		fill: var(--svk-btn-fill-color-hover, var(--btn-text-color-hover));
+		border: var(--svk-btn-border-width, var(--btn-border-width))
+			var(--svk-btn-border-style, var(--btn-border-style))
+			var(--svk-btn-border-color-hover, var(--btn-border-color-hover));
+		box-shadow: var(--svk-btn-shadow-direction, var(--btn-shadow-direction))
+			var(--svk-btn-shadow-color-hover, var(--btn-shadow-color-hover));
 	}
 
 	.root:active:not(.loading) {
-		background-color: var(--btn-bg-color-active);
-		color: var(--btn-text-color-active);
-		fill: var(--btn-text-color-active);
-		border: var(--btn-border-width) var(--btn-border-style) var(--btn-border-color-active);
-		box-shadow: var(--btn-shadow-direction) var(--btn-shadow-color-active);
+		background-color: var(--svk-btn-bg-color-active, var(--btn-bg-color-active));
+		color: var(--svk-btn-text-color-active, var(--btn-text-color-active));
+		fill: var(--svk-btn-fill-color-active, var(--btn-text-color-active));
+		border: var(--svk-btn-border-width, var(--btn-border-width))
+			var(--svk-btn-border-style, var(--btn-border-style))
+			var(--svk-btn-border-color-active, var(--btn-border-color-active));
+		box-shadow: var(--svk-btn-shadow-direction, var(--btn-shadow-direction))
+			var(--svk-btn-shadow-color-active, var(--btn-shadow-color-active));
 	}
 
 	.root:is(.variant-text, .variant-link),
@@ -1280,9 +1296,9 @@
 		height: 100%;
 		top: 0;
 		left: 0;
-		border-radius: var(--btn-border-radius);
+		border-radius: var(--svk-btn-border-radius, var(--btn-border-radius));
 
-		box-shadow: 0 0 0 6px var(--btn-wave-color);
+		box-shadow: 0 0 0 6px var(--svk-btn-wave-color, var(--btn-wave-color));
 		opacity: 0;
 		transition:
 			box-shadow 0.3s var(--svant-motion-ease-in-out),
@@ -1290,7 +1306,7 @@
 	}
 
 	.root:not(.variant-text, .variant-link, .loading):active::before {
-		box-shadow: 0 0 0 0 var(--btn-wave-color);
+		box-shadow: 0 0 0 0 var(--svk-btn-wave-color, var(--btn-wave-color));
 		opacity: 0.15;
 		transition: 0s;
 	}
@@ -1302,7 +1318,8 @@
 	}
 
 	.svicon-only {
-		padding: var(--btn-padding-block) calc(var(--btn-padding-block) * 1.4);
+		padding: var(--svk-btn-padding-block, var(--btn-padding-block))
+			calc(var(--svk-btn-padding-block, var(--btn-padding-block)) * 1.4);
 	}
 
 	.svicon.hide-loading {

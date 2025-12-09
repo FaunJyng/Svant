@@ -1,4 +1,5 @@
 .svant-theme-dark {
+	/* Global: general styles */
 	--svant-bg-color-root: rgb(20, 20, 20);
 	background-color: var(--svant-bg-color-root) !important;
 	--svant-text-color-root: rgb(255, 255, 255);
@@ -11,6 +12,8 @@
 	--svant-bg-color-general-theme: var(--svant-text-color-general-black);
 	--svant-bg-color-general-theme-hover: var(--svant-text-color-general-black-hover);
 	--svant-bg-color-general-theme-active: var(--svant-text-color-general-black-active);
+
+	--svant-seperator-color: var(--svant-separator-color-white);
 
 	/* Global: default colors */
 	--svant-text-color-default: var(--svant-text-color-general-white);

@@ -1,6 +1,6 @@
 .svant-theme-light {
+	/* Global: general styles */
 	--svant-bg-color-root: white;
-	--svant-bg-color-root-rgb-value: 255, 255, 255;
 	background-color: var(--svant-bg-color-root) !important;
 	--svant-text-color-root: black;
 	color: var(--svant-text-color-root);
@@ -12,6 +12,8 @@
 	--svant-bg-color-general-theme: var(--svant-text-color-general-white);
 	--svant-bg-color-general-theme-hover: var(--svant-text-color-general-white-hover);
 	--svant-bg-color-general-theme-active: var(--svant-text-color-general-white-active);
+
+	--svant-seperator-color: var(--svant-separator-color-black);
 
 	/* Global: default colors */
 	--svant-text-color-default: var(--svant-text-color-general-black);
