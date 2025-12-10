@@ -1,12 +1,13 @@
 <script module>
+	import type { AutoComplete } from '$lib/utils/helper-types.js';
 	import { LoadingOutlined } from '@axolt/svicon-ant';
 	import { onMount, tick, type Snippet } from 'svelte';
 	import type { MouseEventHandler } from 'svelte/elements';
-	type Type = 'primary' | 'default' | 'dashed' | 'text' | 'link';
-	type Variant = 'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link';
-	type Size = 'large' | 'medium' | 'small';
-	type Shape = 'circle' | 'rounded';
-	type Color =
+	type Type = AutoComplete<'primary' | 'default' | 'dashed' | 'text' | 'link'>;
+	type Variant = AutoComplete<'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'>;
+	type Size = AutoComplete<'large' | 'medium' | 'small'>;
+	type Shape = AutoComplete<'circle' | 'rounded'>;
+	type Color = AutoComplete<
 		| 'default'
 		| 'primary'
 		| 'danger'
@@ -22,9 +23,10 @@
 		| 'volcano'
 		| 'geekblue'
 		| 'lime'
-		| 'gold';
+		| 'gold'
+	>;
+	type IconPlacement = AutoComplete<'start' | 'end'>;
 	type ButtonHTMLType = 'submit' | 'reset' | 'button';
-	type IconPlacement = 'start' | 'end';
 	export type ButtonProps = {
 		// Functional props
 		children?: Snippet;
@@ -286,9 +288,8 @@
 </button>
 
 <style>
+	/* Component tokens */
 	.tokens {
-		/* Component tokens */
-		/* Typography */
 		--preset-btn-content-font-size: var(--svant-font-size);
 		--preset-btn-content-font-size-sm: var(--svant-font-size);
 		--preset-btn-content-font-size-lg: var(--svant-font-size-md);
@@ -296,20 +297,19 @@
 		--preset-btn-content-line-height-sm: var(--svant-line-height-relative-sm);
 		--preset-btn-content-line-height-lg: var(--svant-line-height-relative);
 		--preset-btn-font-weight: 400;
-		/* Spacing */
+
 		--preset-btn-padding-block: 4px;
 		--preset-btn-padding-block-sm: 0px;
 		--preset-btn-padding-block-lg: 7px;
 		--preset-btn-padding-inline: 15px;
 		--preset-btn-padding-inline-sm: 7px;
 		--preset-btn-padding-inline-lg: 15px;
-		/* Icon sizing */
+
 		--preset-btn-only-icon-size: inherit;
 		--preset-btn-only-icon-size-sm: inherit;
 		--preset-btn-only-icon-size-lg: inherit;
 	}
 
-	/* Rendered tokens */
 	.tokens {
 		--btn-width: fit-content;
 		--btn-font-size: var(--preset-btn-content-font-size);
@@ -350,7 +350,6 @@
 	}
 
 	/* Type layer */
-
 	.type-primary {
 		--btn-text-color: var(--svant-text-color-general-white);
 		--btn-text-color-hover: var(--svant-text-color-general-white);
@@ -453,8 +452,7 @@
 		--btn-wave-color: transparent;
 	}
 
-	/* - Color layer */
-
+	/* Color layer */
 	.color-default,
 	.type-default.varianted:not(.colored),
 	.type-dashed.varianted:not(.colored),
@@ -1016,7 +1014,6 @@
 	}
 
 	/* - Variant layer */
-
 	.variant-solid,
 	.type-primary.colored:not(.varianted),
 	.variant-solid:is(.type-default, .type-dashed, .type-text):not(.colored) {

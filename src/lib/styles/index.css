@@ -12,6 +12,6 @@
 	padding: 0;
 	margin: 0;
 	font-family: var(--svant-font-family-base);
-	font-size: var(--svant-global-font-size);
-	line-height: var(--svant-line-height-base);
+	font-size: var(--svant-font-size);
+	line-height: var(--svant-line-height);
 }
